@@ -14,8 +14,8 @@ module.exports = {
     'createdAt': 'created_at',
     'updatedAt': 'updated_at',
   },
+  timezone: 'America/Sao_Paulo',
   dialectOptions: {
-    timezone: 'America/Sao_Paulo'
+    timezone: 'local'
   },
-  timezone: 'America/Sao_Paulo'
 }
