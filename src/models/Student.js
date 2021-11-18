@@ -37,7 +37,7 @@ export default class Student extends Model {
       },
       age: {
         type: Sequelize.INTEGER,
-        defaultValue: '',
+        defaultValue: 0,
         validate: {
           isInt: {
             msg: 'A idade precisa ser um número inteiro.'
@@ -46,7 +46,7 @@ export default class Student extends Model {
       },
       weight: {
         type: Sequelize.FLOAT,
-        defaultValue: '',
+        defaultValue: 0,
         validate: {
           isInt: {
             msg: 'O peso precisa ser um número inteiro ou decimal.'
@@ -55,7 +55,7 @@ export default class Student extends Model {
       },
       height: {
         type: Sequelize.FLOAT,
-        defaultValue: '',
+        defaultValue: 0,
         validate: {
           isInt: {
             msg: 'A altura precisa ser um número inteiro ou decimal.'
@@ -65,7 +65,11 @@ export default class Student extends Model {
     },
     {
       sequelize,
+      tableName:'students'
     })
     return this
+  }
+  static associate(models){
+      this.hasMany(models.Picture, { foreignKey: 'student_id', sourceKey:'id' })
   }
 }

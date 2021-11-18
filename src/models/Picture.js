@@ -1,4 +1,5 @@
 import  Sequelize, { Model }  from "sequelize";
+import appConfig from "../config/appConfig";
 
 export default class Picture extends Model {
   static init(sequelize) {
@@ -30,6 +31,12 @@ export default class Picture extends Model {
           },
         },
       },
+      uri: {
+        type: Sequelize.VIRTUAL,
+        get(){
+          return `${ appConfig.uri }/${ this.getDataValue('filename') }`
+        }
+      },
     },
     {
       sequelize,
@@ -37,11 +44,8 @@ export default class Picture extends Model {
     })
     return this
   }
-
   static associate(models) {
-    if(models){
-      const { Student } = models
-      this.belongsTo(Student, { foreignKey: 'student_id' })
-    }
+      this.belongsTo(models.Student, { foreignKey: 'student_id', targetKey: 'id' })
   }
+
 }
